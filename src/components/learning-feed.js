@@ -5,6 +5,7 @@ import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
@@ -21,6 +22,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0.2),
   },
   comment: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+  divider: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   }
@@ -67,31 +72,34 @@ const LearningFeed = () => {
             <ListSubheader disableSticky>
               {edge.node.frontmatter.date}
             </ListSubheader>
-            {edge.node.frontmatter.learnings.map((learning) => (
-              <ListItem key={`${learning.title}`}>
-                <Grid container wrap="nowrap" spacing="2" alignItems="center">
-                  <Grid item>
-                    {Icon(learning.taskType)}
-                  </Grid>
-                  <Grid item>
-                    <Grid container direction="column">
-                      <Grid item>
-                        <ListItemText primary={learning.title} />
-                      </Grid>
-                      {learning.comment && <Grid item>
-                        <Typography component="div" variant="body2" className={classes.comment}>
-                          <Box color="text.secondary">{learning.comment}</Box>
-                        </Typography>
-                      </Grid>}
-                      <Grid item>
-                        {learning.tags.map((tag) => (
-                          <Chip size="small" className={classes.chip} label={tag} variant="outlined"/>
-                        ))}
+            {edge.node.frontmatter.learnings.map((learning, i) => (
+              <>
+                <ListItem key={`${learning.title}`}>
+                  <Grid container wrap="nowrap" spacing="2" alignItems="center">
+                    <Grid item>
+                      {Icon(learning.taskType)}
+                    </Grid>
+                    <Grid item>
+                      <Grid container direction="column">
+                        <Grid item>
+                          <ListItemText primary={learning.title} />
+                        </Grid>
+                        {learning.comment && <Grid item>
+                          <Typography component="div" variant="body2" className={classes.comment}>
+                            <Box color="text.secondary">{learning.comment}</Box>
+                          </Typography>
+                        </Grid>}
+                        <Grid item>
+                          {learning.tags.map((tag) => (
+                            <Chip size="small" className={classes.chip} label={tag} variant="outlined"/>
+                          ))}
+                        </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
-                </Grid>
-              </ListItem>
+                </ListItem>
+                {(i !== edge.node.frontmatter.learnings.length - 1) && <Divider className={classes.divider}/>}
+              </>
             ))}
           </Paper>
         </Grid>
