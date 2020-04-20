@@ -7,11 +7,19 @@
 
 import React from "react"
 import PropTypes from "prop-types"
+import { makeStyles } from '@material-ui/core/styles';
 import { useStaticQuery, graphql } from "gatsby"
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    marginTop: `${theme.spacing(10)}px`,
+  }
+}))
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -24,19 +32,20 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const classes = useStyles()
   return (
-    <>
-      <AppBar position="static">
+    <Box className={classes.root}>
+      <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h5">
             {data.site.siteMetadata.title}
           </Typography>
         </Toolbar>
       </AppBar>
-      <Container fixed>
+      <Container fixed className={classes.container}>
         {children}
       </Container>
-    </>
+    </Box>
   )
 }
 
