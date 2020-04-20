@@ -19,7 +19,7 @@ import { BookOutlined as ReadIcon,
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    margin: `${theme.spacing(2)}px auto`,
+    marginBottom: theme.spacing(2)
   },
   chip: {
     margin: theme.spacing(0.2)
@@ -59,35 +59,33 @@ const LearningFeed = () => {
   }
 
   return <List className={classes.root} subheader={<li />}>
-      {data.allMarkdownRemark.edges.map((edge) => (
-        <Paper className={classes.paper}>
-          <ListSubheader disableSticky>
-            {edge.node.frontmatter.date}
-          </ListSubheader>
-          {edge.node.frontmatter.learnings.map((learning) => (
-            <ListItem key={`${learning.title}`}>
-              <Grid container direction="column">
+    {data.allMarkdownRemark.edges.map((edge) => (
+      <Paper className={classes.paper} variant="outlined">
+        <ListSubheader disableSticky>
+          {edge.node.frontmatter.date}
+        </ListSubheader>
+        {edge.node.frontmatter.learnings.map((learning) => (
+          <ListItem key={`${learning.title}`}>
+            <Grid container wrap="nowrap" spacing="2" alignItems="center">
+              <Grid item>
+                {Icon(learning.taskType)}
+              </Grid>
+              <Grid item>
+                <Grid container direction="column">
                   <Grid item>
-                    <Grid container wrap="nowrap" spacing="2" alignItems="center">
-                      <Grid item>
-                        {Icon(learning.taskType)}
-                      </Grid>
-                      <Grid item>
-                        <Typography>
-                          <ListItemText primary={learning.title} />
-                        </Typography>
-                      </Grid>
-                    </Grid>
+                    <ListItemText primary={learning.title} />
                   </Grid>
                   <Grid item>
                     {learning.tags.map((tag) => ( <Chip className={classes.chip} label={tag} variant="outlined"/>))}
                   </Grid>
+                </Grid>
               </Grid>
-            </ListItem>
-          ))}
-        </Paper>
-      ))}
-    </List>
+            </Grid>
+          </ListItem>
+        ))}
+      </Paper>
+    ))}
+  </List>
 }
 
 export default LearningFeed

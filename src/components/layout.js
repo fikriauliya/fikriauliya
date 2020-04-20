@@ -12,12 +12,11 @@ import { useStaticQuery, graphql } from "gatsby"
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    marginTop: `${theme.spacing(10)}px`,
+    marginTop: theme.spacing(10)
   }
 }))
 
@@ -37,14 +36,14 @@ const Layout = ({ children }) => {
     <Box className={classes.root}>
       <AppBar position="fixed">
         <Toolbar>
-          <Typography variant="h5">
+          <Typography variant="h6">
             {data.site.siteMetadata.title}
           </Typography>
         </Toolbar>
       </AppBar>
-      <Container fixed className={classes.container}>
+      <Box className={classes.container}>
         {children}
-      </Container>
+      </Box>
     </Box>
   )
 }
