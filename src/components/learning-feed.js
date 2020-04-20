@@ -4,10 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
@@ -18,9 +15,6 @@ import { BookOutlined as ReadIcon,
 } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginBottom: theme.spacing(2)
-  },
   chip: {
     margin: theme.spacing(0.2)
   }
@@ -59,32 +53,38 @@ const LearningFeed = () => {
   }
 
   return <List className={classes.root} subheader={<li />}>
-    {data.allMarkdownRemark.edges.map((edge) => (
-      <Paper className={classes.paper} variant="outlined">
-        <ListSubheader disableSticky>
-          {edge.node.frontmatter.date}
-        </ListSubheader>
-        {edge.node.frontmatter.learnings.map((learning) => (
-          <ListItem key={`${learning.title}`}>
-            <Grid container wrap="nowrap" spacing="2" alignItems="center">
-              <Grid item>
-                {Icon(learning.taskType)}
-              </Grid>
-              <Grid item>
-                <Grid container direction="column">
+    <Grid container spacing={2}>
+      {data.allMarkdownRemark.edges.map((edge) => (
+        <Grid item xs={12} md={6}>
+          <Paper variant="outlined">
+            <ListSubheader disableSticky>
+              {edge.node.frontmatter.date}
+            </ListSubheader>
+            {edge.node.frontmatter.learnings.map((learning) => (
+              <ListItem key={`${learning.title}`}>
+                <Grid container wrap="nowrap" spacing="2" alignItems="center">
                   <Grid item>
-                    <ListItemText primary={learning.title} />
+                    {Icon(learning.taskType)}
                   </Grid>
                   <Grid item>
-                    {learning.tags.map((tag) => ( <Chip className={classes.chip} label={tag} variant="outlined"/>))}
+                    <Grid container direction="column">
+                      <Grid item>
+                        <ListItemText primary={learning.title} />
+                      </Grid>
+                      <Grid item>
+                        {learning.tags.map((tag) => (
+                          <Chip size="small" className={classes.chip} label={tag} variant="outlined"/>
+                        ))}
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
-            </Grid>
-          </ListItem>
-        ))}
-      </Paper>
-    ))}
+              </ListItem>
+            ))}
+          </Paper>
+        </Grid>
+      ))}
+    </Grid>
   </List>
 }
 
