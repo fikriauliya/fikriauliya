@@ -26,7 +26,7 @@ const LearningCalendar = () => {
   }));
   const endDate = new Date(heatmap[heatmap.length - 1].date)
   const startDate = new Date(endDate)
-  startDate.setFullYear(startDate.getFullYear() - 1)
+  startDate.setMonth(startDate.getMonth() - 6)
   return <CalendarHeatmap
     startDate={startDate}
     endDate={endDate}
