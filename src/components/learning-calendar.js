@@ -32,6 +32,7 @@ const LearningCalendar = () => {
     endDate={endDate}
     values={heatmap}
     showWeekdayLabels={true}
+    gutterSize={2}
     classForValue={(value) => {
       if (!value) {
         return 'color-empty';
