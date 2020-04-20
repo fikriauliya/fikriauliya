@@ -8,8 +8,10 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-
-import Header from "./header"
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -24,15 +26,16 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h5">
+            {data.site.siteMetadata.title}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Container fixed>
+        {children}
+      </Container>
     </>
   )
 }
