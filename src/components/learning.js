@@ -5,6 +5,7 @@ import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -17,9 +18,6 @@ import { BookOutlined as ReadIcon,
 } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    margin: theme.spacing(0.5)
-  },
   paper: {
     margin: `${theme.spacing(2)}px auto`,
   },
@@ -70,12 +68,14 @@ const Learning = () => {
             <ListItem key={`${learning.title}`}>
               <Grid container direction="column">
                   <Grid item>
-                    <Grid container alignItems="center">
-                      <Grid item className={classes.icon}>
+                    <Grid container wrap="nowrap" spacing="2" alignItems="center">
+                      <Grid item>
                         {Icon(learning.taskType)}
                       </Grid>
                       <Grid item>
-                        <ListItemText primary={learning.title} />
+                        <Typography>
+                          <ListItemText primary={learning.title} />
+                        </Typography>
                       </Grid>
                     </Grid>
                   </Grid>
