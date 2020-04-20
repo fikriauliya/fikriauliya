@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Learning = () => {
+const LearningFeed = () => {
   const data = useStaticQuery(graphql`
     query {
       allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}) {
@@ -90,4 +90,4 @@ const Learning = () => {
     </List>
 }
 
-export default Learning
+export default LearningFeed
